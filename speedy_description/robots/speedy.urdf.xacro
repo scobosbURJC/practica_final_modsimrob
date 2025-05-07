@@ -143,13 +143,17 @@
                           parent_link="$(arg prefix)front_camera_objective_link"
                           xyz_offset="0.09844 -0.00000 0.00000"
                           rpy="0.00000 0.00000 0.0000"
-                          robot_ns="$(arg robot_ns)"/>
+                          robot_ns="$(arg robot_ns)"
+                          video_width="640"
+                          video_height="480"/>
 
     <xacro:sensor_camera  prefix="$(arg prefix)gripper_"
-                          parent_link="$(arg prefix)gripper_camera_link"
-                          xyz_offset="0.000000 -0.00000 0.00000"
+                          parent_link="$(arg prefix)gripper_base_link"
+                          xyz_offset="0.000000 -0.05000 0.0000"
                           rpy="${-PI/2} 0.00000 ${-PI/2}"
-                          robot_ns="$(arg robot_ns)"/>
+                          robot_ns="$(arg robot_ns)"
+                          video_width="640"
+                          video_height="480"/>
 
     <xacro:sensor_imu prefix="$(arg prefix)base_"
                       parent_link="$(arg prefix)base_link"
@@ -159,10 +163,10 @@
                       topic="base_imu"/>
 
     <!-- GAZEBO ROS2 CONTROL -->
-    <!--xacro:include filename="$(find speedy_description)/urdf/ros2_control.urdf.xacro"/>
+    <xacro:include filename="$(find speedy_description)/urdf/ros2_control.urdf.xacro"/>
     <xacro:arg name="config_controllers" default="$(find speedy_description)/config/speedy_controllers.yaml"/>
     <xacro:arg name="update_rate" default="20"/>
-    <xacro:ros2_control/-->
+    <xacro:ros2_control frame_prefix="$(arg prefix)"/>
 
     <!-- MATERIALS -->
     <material name="Material">

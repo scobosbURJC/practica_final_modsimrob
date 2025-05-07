@@ -9,9 +9,22 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>xacro</depend>
-  <depend>robot_state_publisher</depend>
-  <depend>joint_state_publisher</depend>
+  <!-- BUILD AND RUN THE ROBOT -->
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>gz_ros2_control_demos</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>twist_stamper</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>rviz_common</exec_depend>
+  <exec_depend>rviz_default_plugins</exec_depend>
+
+  <!-- TELEOPERATION -->
+  <exec_depend>joy</exec_depend>
+  <exec_depend>teleop_twist</exec_depend>
+  <exec_depend>twist_mux</exec_depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

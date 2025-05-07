@@ -148,13 +148,13 @@
 
     <link name="${prefix}camera_2_link">
       <collision name="camera_2_collision">
-        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <origin rpy="0.00000 ${PI/2} 0.00000" xyz="0.00000 0.00000 0.00000"/>
         <geometry>
           <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.009.dae" scale="1.00000 1.00000 1.00000"/>
         </geometry>
       </collision>
       <visual name="camera_2">
-        <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <origin rpy="0.00000 ${PI/2} 0.00000" xyz="0.00000 0.00000 0.00000"/>
         <material name="Material.007"/>
         <geometry>
           <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.009.dae" scale="1.00000 1.00000 1.00000"/>
@@ -167,7 +167,22 @@
       <child link="${prefix}camera_2_link"/>
     </joint>
 
-    <link name="${prefix}front_camera_lens_link"/>
+    <link name="${prefix}front_camera_lens_link">
+      <collision name="camera_collision">
+        <origin rpy="0.00000 ${PI/2} 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+        <geometry>
+          <cylinder radius="0.0764605" length="0.02"/>
+        </geometry>
+      </collision>
+      <visual name="camera">
+        <origin rpy="0.00000 ${PI/2} 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <material name="grey"/>
+        <geometry>
+          <cylinder radius="0.0764605" length="0.02"/>
+        </geometry>
+      </visual>
+    </link>
+
     <joint name="${prefix}camera_lens_link_joint" type="fixed">
       <origin rpy="-0.00000 0.000 0.00000" xyz="0.36378 -0.09634 0.02978"/>
       <parent link="${prefix}head_link"/>
@@ -176,13 +191,13 @@
 
     <link name="${prefix}front_camera_objective_link">
       <collision name="camera_collision">
-        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+        <origin rpy="0.00000 ${PI/2} 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
         <geometry>
           <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.004.dae" scale="0.35487 0.35487 0.44358"/>
         </geometry>
       </collision>
       <visual name="camera">
-        <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <origin rpy="0.00000 ${PI/2} 0.00000" xyz="0.00000 0.00000 -0.00000"/>
         <material name="Material.005"/>
         <geometry>
           <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.004.dae" scale="0.35487 0.35487 0.44358"/>
@@ -197,13 +212,13 @@
 
     <link name="${prefix}head_link">
       <collision name="head_collision">
-        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00016 -0.00000"/>
+        <origin rpy="0.00000 ${PI/2} 0.00000" xyz="0.00000 0.00016 -0.00000"/>
         <geometry>
           <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.001.dae" scale="0.35487 0.35487 0.35487"/>
         </geometry>
       </collision>
       <visual name="head">
-        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00016 -0.00000"/>
+        <origin rpy="0.00000 ${PI/2} 0.00000" xyz="0.00000 0.00016 -0.00000"/>
         <material name="${white_material}"/>
         <geometry>
           <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.001.dae" scale="0.35487 0.35487 0.35487"/>
@@ -246,6 +261,9 @@
 
   <material name="Material.005">
     <color rgba="0.14118 0.14118 0.14118 1.00000"/>
+  </material>
+  <material name="grey">
+    <color rgba="0.6 0.6 0.6 1.0000"/>
   </material>
   <material name="Material.007">
     <color rgba="0.02745 0.02745 0.02745 1.00000"/>

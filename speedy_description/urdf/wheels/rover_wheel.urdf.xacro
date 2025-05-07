@@ -61,6 +61,7 @@
       <child link="${pos}_${side}_wheel_link"/>
       <origin xyz="${xyz}" rpy="${rpy}"/>
       <axis xyz="${axis_xyz}"/>
+      <limit velocity="1.0" effort="5.0"/>
     </joint>
 
     <transmission name="${pos}_${side}_wheel_joint_trans">
