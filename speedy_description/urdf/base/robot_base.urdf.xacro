@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:include filename="$(find speedy_description)/urdf/utils/utils.urdf.xacro"/>
+
+  <xacro:macro name="basket_wall" params="idx xyz rpy parent_link material prefix">
+    <xacro:property name="name" value="basket_wall_${idx}"/>
+    
+    <link name="${prefix}${name}_link">
+      <collision name="${name}_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <geometry>
+          <box size="1.02000 0.02000 0.50000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <xacro:solid_cuboid_inertia m="2.00000" w="0.02000" h="0.50000" d="1.02000"/> 
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <mass value="2.00000"/>
+      </inertial>
+      <visual name="${name}">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <material name="${material}"/>
+        <geometry>
+          <box size="1.00000 0.02000 0.50000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${prefix}${name}_link_joint" type="fixed">
+      <origin rpy="${rpy}" xyz="${xyz}"/>
+      <parent link="${parent_link}"/>
+      <child link="${prefix}${name}_link"/>
+    </joint>
+
+  </xacro:macro>
+
+  <xacro:macro name="antena" params="length xyz rpy parent_link prefix">
+    <link name="${prefix}antena_stem_link">
+      <collision name="antena_stem_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <geometry>
+          <cylinder radius="0.00500" length="${length}"/>
+        </geometry>
+      </collision>
+      <visual name="antena_stem">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <material name="Material.006"/>
+        <geometry>
+          <cylinder radius="0.00500" length="${length}"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${prefix}antena_stem_link_joint" type="fixed">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="${xyz}"/>
+      <parent link="${parent_link}"/>
+      <child link="${prefix}antena_stem_link"/>
+    </joint>
+
+    <link name="${prefix}antena_top_link">
+      <collision name="antena_top_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+        <geometry>
+          <sphere radius="0.01000"/>
+        </geometry>
+      </collision>
+      <visual name="antena_top">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <material name="Material.006"/>
+        <geometry>
+          <sphere radius="0.01000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${prefix}antena_top_link_joint" type="fixed">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 ${length/2}"/>
+      <parent link="${prefix}antena_stem_link"/>
+      <child link="${prefix}antena_top_link"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="robot_base" params="base_height white_material prefix">
+  
+    <link name="${prefix}base_footprint"/>
+    <link name="${prefix}base_link">
+      <collision name="base_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <geometry>
+          <box size="3.00000 1.30000 0.50000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <xacro:solid_cuboid_inertia m="500.00000" w="1.30000" h="0.50000" d="3.00000"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <mass value="500.00000"/>
+      </inertial>
+      <visual name="base">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <material name="${white_material}"/>
+        <geometry>
+          <box size="3.00000 1.30000 0.50000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${prefix}base_link_joint" type="fixed">
+      <origin xyz="0.00000 0.00000 ${base_height}" rpy="0.00000 0.00000 0.00000"/>
+      <parent link="${prefix}base_footprint"/>
+      <child link="${prefix}base_link"/>
+    </joint>
+
+    <xacro:basket_wall  idx="1"
+                        xyz="-0.29819 0.00176 0.50000"
+                        rpy="0.00000 0.00000 ${PI/2}"
+                        parent_link="${prefix}base_link"
+                        material="${white_material}"
+                        prefix="${prefix}"/>
+
+    <xacro:basket_wall  idx="2"
+                        xyz="-0.79819 0.50176 0.50000"
+                        rpy="0.00000 0.00000 0.00000"
+                        parent_link="${prefix}base_link"
+                        material="${white_material}"
+                        prefix="${prefix}"/>
+
+    <xacro:basket_wall  idx="3"
+                        xyz="-1.29819 0.00176 0.50000"
+                        rpy="0.00000 0.00000 ${PI/2}"
+                        parent_link="${prefix}base_link"
+                        material="${white_material}"
+                        prefix="${prefix}"/>
+
+    <xacro:basket_wall  idx="4"
+                        xyz="-0.79819 -0.49824 0.50000"
+                        rpy="0.00000 0.00000 0.00000"
+                        parent_link="${prefix}base_link"
+                        material="${white_material}"
+                        prefix="${prefix}"/>
+
+    <xacro:antena length="0.18157"
+                  xyz="0.00005 -0.05002 0.324755"
+                  rpy="0.00000 0.00000 0.00000"
+                  parent_link="${prefix}head_link"
+                  prefix="${prefix}"/>
+
+    <link name="${prefix}camera_2_link">
+      <collision name="camera_2_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.009.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </collision>
+      <visual name="camera_2">
+        <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <material name="Material.007"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.009.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}camera_2_link_joint" type="fixed">
+      <origin rpy="0.00000 0.0000 0.00000" xyz="0.24339 0.09495 0.10749"/>
+      <parent link="${prefix}head_link"/>
+      <child link="${prefix}camera_2_link"/>
+    </joint>
+
+    <link name="${prefix}front_camera_lens_link"/>
+    <joint name="${prefix}camera_lens_link_joint" type="fixed">
+      <origin rpy="-0.00000 0.000 0.00000" xyz="0.36378 -0.09634 0.02978"/>
+      <parent link="${prefix}head_link"/>
+      <child link="${prefix}front_camera_lens_link"/>
+    </joint>
+
+    <link name="${prefix}front_camera_objective_link">
+      <collision name="camera_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.004.dae" scale="0.35487 0.35487 0.44358"/>
+        </geometry>
+      </collision>
+      <visual name="camera">
+        <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <material name="Material.005"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.004.dae" scale="0.35487 0.35487 0.44358"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}camera_objective_link_joint" type="fixed">
+      <origin rpy="0.00000 0.0000 0.00000" xyz="0.27441 -0.09634 0.02978"/>
+      <parent link="${prefix}head_link"/>
+      <child link="${prefix}front_camera_objective_link"/>
+    </joint>
+
+    <link name="${prefix}head_link">
+      <collision name="head_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00016 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.001.dae" scale="0.35487 0.35487 0.35487"/>
+        </geometry>
+      </collision>
+      <visual name="head">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00016 -0.00000"/>
+        <material name="${white_material}"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.001.dae" scale="0.35487 0.35487 0.35487"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}head_link_joint" type="fixed">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00016 0.31030"/>
+      <parent link="${prefix}neck_link"/>
+      <child link="${prefix}head_link"/>
+    </joint>
+
+    <link name="${prefix}neck_link">
+      <collision name="neck_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00016 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.007.dae" scale="0.70974 0.70974 0.70974"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00000" ixy="0.00000" ixz="0.00000" iyy="0.00000" iyz="0.00000" izz="0.00000"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00016 -0.00000"/>
+        <mass value="0.70000"/>
+      </inertial>
+      <visual name="neck">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00016 -0.00000"/>
+        <material name="${white_material}"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.007.dae" scale="0.70974 0.70974 0.70974"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}neck_link_joint" type="fixed">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="1.23325 0.00000 0.32189"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}neck_link"/>
+    </joint>
+
+  </xacro:macro>
+
+  <material name="Material.005">
+    <color rgba="0.14118 0.14118 0.14118 1.00000"/>
+  </material>
+  <material name="Material.007">
+    <color rgba="0.02745 0.02745 0.02745 1.00000"/>
+  </material>
+  <material name="Material.006">
+      <color rgba="0.00000 0.00000 0.00000 1.00000"/>
+  </material>
+
+</robot>

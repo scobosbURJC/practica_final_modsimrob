@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:include filename="$(find speedy_description)/urdf/utils/utils.urdf.xacro"/>
+
+  <xacro:macro name="wheel_support" params="pos side xyz rpy prefix">
+
+    <xacro:property name="top_support_rpy" value="3.1415926535897931"/>
+
+    <xacro:if value="${side == 'left'}">
+      <xacro:property name="lateral_support_xyz" value="-0.00000 -0.27811 0.26370"/>
+      <xacro:property name="axis_xyz" value="0.00301 -0.18957 -0.06954"/>
+
+    </xacro:if>
+
+    <xacro:if value="${side == 'right'}">
+      <xacro:property name="lateral_support_xyz" value="-0.00000 -0.27811 -0.26370"/>
+      <xacro:property name="axis_xyz" value="0.00301 -0.18957 0.06954"/>
+
+    </xacro:if>
+
+    <!-- TOP -->
+
+    <link name="${prefix}${pos}_${side}_wheel_top_support_link">
+      <collision name="${pos}_${side}_wheel_top_support_collision">
+        <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cube.018.dae" scale="0.10000 0.04007 0.30000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.15268" ixy="0.00000" ixz="-0.00000" iyy="0.01934" iyz="-0.00000" izz="0.16667"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <mass value="5.00000"/>
+      </inertial>
+      <visual name="${pos}_${side}_wheel_top_support">
+        <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <material name="Material.010"/>
+        <geometry>
+          <box size="0.20000 0.08013 0.60000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${prefix}${pos}_${side}_wheel_top_support_link_joint" type="fixed">
+      <origin rpy="${rpy}" xyz="${xyz}"/>
+      <parent link="${prefix}${pos}_${side}_leg_link"/>
+      <child link="${prefix}${pos}_${side}_wheel_top_support_link"/>
+    </joint>
+
+    <!-- LATERAL -->
+
+    <link name="${prefix}${pos}_${side}_wheel_lateral_sup_link">
+      <collision name="${pos}_${side}_wheel_lateral_sup_collision">
+        <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cube.003.dae" scale="0.10000 0.26800 0.03775"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.12208" ixy="0.00000" ixz="0.00000" iyy="0.13637" iyz="0.00000" izz="0.01904"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <mass value="5.00000"/>
+      </inertial>
+      <visual name="${pos}_${side}_wheel_lateral_sup">
+        <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <material name="Material.010"/>
+        <geometry>
+          <box size="0.20000 0.53600 0.07550"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${prefix}${pos}_${side}_wheel_lateral_sup_link_joint" type="fixed">
+      <origin rpy="-0.00000 0.00000 0.00000" xyz="${lateral_support_xyz}"/>
+      <parent link="${prefix}${pos}_${side}_wheel_top_support_link"/>
+      <child link="${prefix}${pos}_${side}_wheel_lateral_sup_link"/>
+    </joint>
+
+    <!-- AXIS -->
+
+    <link name="${prefix}${pos}_${side}_wheel_axis_link">
+      <collision name="${pos}_${side}_wheel_axis_collision">
+        <origin rpy="${PI/2} -0.00000 -0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.003.dae" scale="0.70000 0.70000 2.00000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00728" ixy="-0.00000" ixz="0.00000" iyy="0.00122" iyz="-0.00000" izz="0.00728"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+        <mass value="2.00000"/>
+      </inertial>
+      <visual name="${pos}_${side}_wheel_axis">
+        <origin rpy="${PI/2} -0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.003.dae" scale="0.70000 0.70000 2.00000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="${prefix}${pos}_${side}_wheel_axis_link_joint" type="fixed">
+      <origin rpy="${-PI/2} 0.00000 0.00000" xyz="${axis_xyz}"/>
+      <parent link="${prefix}${pos}_${side}_wheel_lateral_sup_link"/>
+      <child link="${prefix}${pos}_${side}_wheel_axis_link"/>
+    </joint>
+
+  </xacro:macro>
+
+  <xacro:macro name="wheels_chasis" params="side xyz parent_link prefix">
+
+    <xacro:if value="${side == 'left'}">
+      <xacro:property name="base_support_link_rpy" value="${PI/2} 0.00000 0.00000"/>
+      <xacro:property name="legs_union_link_xyz" value="0.00000 0.00000 -0.16639"/>
+
+    </xacro:if>
+
+    <xacro:if value="${side == 'right'}">
+      <xacro:property name="base_support_link_rpy" value="${PI/2} 0.00000 0.00000"/>
+      <xacro:property name="legs_union_link_xyz" value="0.00000 0.00000 0.16639"/>
+
+    </xacro:if>
+
+    <xacro:if value="${side != 'left' and side != 'right'}">
+      <xacro:error message="'side' parameter must be 'right' or 'left'."/>
+    </xacro:if>
+
+    <!-- ############# GENERAL ############# -->
+
+    <link name="${prefix}${side}_wheels_base_support_link">
+      <collision name="${prefix}${side}_wheels_base_support_collision">
+        <origin rpy="-0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.022.dae" scale="1.00000 1.00000 1.92308"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00427" ixy="-0.00000" ixz="-0.00000" iyy="0.00125" iyz="-0.00000" izz="0.00427"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+        <mass value="0.70000"/>
+      </inertial>
+      <visual name="${prefix}${side}_wheels_base_support">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+        <material name="Material.016"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.022.dae" scale="1.00000 1.00000 1.92308"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}${side}_wheels_base_support_link_joint" type="fixed">
+      <origin rpy="${base_support_link_rpy}" xyz="${xyz}"/>
+      <parent link="${parent_link}"/>
+      <child link="${prefix}${side}_wheels_base_support_link"/>
+    </joint>
+
+    <link name="${prefix}${side}_legs_union_link">
+      <collision name="${side}_legs_union_collision">
+        <origin rpy="-0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.006.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00336" ixy="-0.00000" ixz="-0.00000" iyy="0.00336" iyz="-0.00000" izz="0.00334"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+        <mass value="0.70000"/>
+      </inertial>
+      <visual name="${side}_legs_union">
+        <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <material name="Material.016"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.006.dae" scale="1.00000 1.00000 1.00000"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}${side}_legs_union_link_joint" type="fixed">
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="${legs_union_link_xyz}"/>
+      <parent link="${prefix}${side}_wheels_base_support_link"/>
+      <child link="${prefix}${side}_legs_union_link"/>
+    </joint>
+
+    <link name="${prefix}mid_back_${side}_leg_link">
+      <collision name="mid_back_${side}_leg_collision">
+        <origin rpy="0.00000 -0.00000 -0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.dae" scale="0.05000 0.05000 0.38165"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00134" ixy="-0.00000" ixz="-0.00410" iyy="0.02459" iyz="0.00000" izz="0.02386"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <mass value="0.50000"/>
+      </inertial>
+      <visual name="mid_back_${side}_leg">
+        <origin rpy="-0.00000 0.00000 -0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <material name="Material"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.dae" scale="0.05000 0.05000 0.38165"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}mid_back_${side}_leg_link_joint" type="fixed">
+      <origin rpy="-0.00000 1.39626 -0.00000" xyz="-0.41726 -0.00840 -0.06158"/>
+      <parent link="${prefix}${side}_legs_union_link"/>
+      <child link="${prefix}mid_back_${side}_leg_link"/>
+    </joint>
+
+    <link name="${prefix}${side}_mid_back_legs_support_link">
+      <collision name="${side}_mid_back_legs_support_collision">
+        <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.dae" scale="0.08862 0.08862 0.08862"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00933" ixy="-0.00000" ixz="-0.00000" iyy="0.00933" iyz="-0.00000" izz="0.00930"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <mass value="3.00000"/>
+      </inertial>
+      <visual name="${side}_mid_back_legs_support">
+        <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <material name="Material.002"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.dae" scale="0.08862 0.08862 0.08862"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}${side}_mid_back_legs_support_link_joint" type="fixed">
+      <origin rpy="0.00000 -1.39626 -0.00000" xyz="0.01011 -0.00000 -0.33406"/>
+      <parent link="${prefix}mid_back_${side}_leg_link"/>
+      <child link="${prefix}${side}_mid_back_legs_support_link"/>
+    </joint>
+
+    <!-- ################################### -->
+
+    <!-- ############# BACK ############# -->
+
+    <link name="${prefix}back_${side}_leg_link">
+      <collision name="back_${side}_leg_collision">
+        <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.006.dae" scale="0.05000 0.05000 0.39665"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <inertia ixx="0.45308" ixy="-0.00000" ixz="-0.51035" iyy="1.06129" iyz="0.00000" izz="0.63306"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+        <mass value="20.00000"/>
+      </inertial>
+      <visual name="back_${side}_leg">
+        <origin rpy="-0.00000 0.00000 -0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+        <material name="Material"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.006.dae" scale="0.05000 0.05000 0.39665"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}back_${side}_leg_link_joint" type="fixed">
+      <origin rpy="-0.00000 0.87266 -0.00000" xyz="-0.26585 0.00000 -0.22722"/>
+      <parent link="${side}_mid_back_legs_support_link"/>
+      <child link="back_${side}_leg_link"/>
+    </joint>
+
+    <xacro:wheel_support  pos="back"
+                          side="${side}"
+                          xyz="0.02992 0.00327 -0.36631"
+                          rpy="1.57080 -0.87266 0.00000"
+                          prefix="${prefix}"/>
+
+    <!-- ################################ -->
+
+    <!-- ############# FRONT ############# -->
+
+    <link name="${prefix}front_${side}_leg_link">
+      <collision name="front_${side}_leg_collision">
+        <origin rpy="-0.00000 -0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.019.dae" scale="0.83333 0.83333 11.25616"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.99003" ixy="0.00000" ixz="2.04323" iyy="5.37175" iyz="0.00000" izz="4.41898"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+        <mass value="30.00000"/>
+      </inertial>
+      <visual name="front_${side}_leg">
+        <origin rpy="-0.00000 -0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+        <material name="Material.010"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.019.dae" scale="0.83333 0.83333 11.25615"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}front_${side}_leg_link_joint" type="fixed">
+      <origin rpy="-0.00000 -1.13446 0.00000" xyz="0.63134 -0.00840 -0.30458"/>
+      <parent link="${prefix}${side}_legs_union_link"/>
+      <child link="${prefix}front_${side}_leg_link"/>
+    </joint>
+
+    <xacro:wheel_support  pos="front"
+                          side="${side}"
+                          xyz="-0.01282 0.00327 -0.70738"
+                          rpy="${PI/2} 1.13446 0.00000"
+                          prefix="${prefix}"/>
+
+    <!-- ################################# -->
+
+    <!-- ############# MID ############# -->
+    <link name="${prefix}mid_${side}_leg_link">
+      <collision name="mid_${side}_leg_collision">
+        <origin rpy="-0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.008.dae" scale="0.05000 0.05000 0.38165"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.42092" ixy="0.00000" ixz="0.47203" iyy="0.98347" iyz="0.00000" izz="0.58738"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <mass value="20.00000"/>
+      </inertial>
+      <visual name="mid_${side}_leg">
+        <origin rpy="-0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <material name="Material"/>
+        <geometry>
+          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.008.dae" scale="0.05000 0.05000 0.38165"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}mid_${side}_leg_link_joint" type="fixed">
+      <origin rpy="-0.00000 -0.87266 0.00000" xyz="0.29137 0.00000 -0.24007"/>
+      <parent link="${prefix}${side}_mid_back_legs_support_link"/>
+      <child link="${prefix}mid_${side}_leg_link"/>
+    </joint>
+
+    <xacro:wheel_support  pos="mid"
+                          side="${side}"
+                          xyz="-0.02892 0.00327 -0.34752"
+                          rpy="1.57080 0.87266 -0.00000"
+                          prefix="${prefix}"/>
+    <!-- ############################### -->
+
+  </xacro:macro>
+
+  <!-- MATERIALS -->
+  <material name="Material.010">
+    <color rgba="0.29804 0.29804 0.29804 1.00000"/>
+  </material>
+  <material name="Material.002">
+    <color rgba="0.80000 0.80000 0.80000 1.00000"/>
+  </material>
+  <material name="Material.016">
+    <color rgba="0.80000 0.80000 0.80000 1.00000"/>
+  </material>
+
+</robot>

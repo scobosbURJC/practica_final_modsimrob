@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find speedy_description)/urdf/utils/utils.urdf.xacro"/>
+
+    <xacro:macro name="sensor_imu" params="prefix parent_link xyz_offset rpy robot_ns topic">
+        <joint name="${prefix}imu_sensor_joint" type="fixed">
+            <origin rpy="${rpy}" xyz="${xyz_offset}"/>
+            <parent link="${parent_link}"/>
+            <child link="${prefix}imu_sensor_link"/>
+        </joint>
+
+        <link name="${prefix}imu_sensor_link">
+            <gazebo reference="${prefix}imu_sensor_link">
+            <sensor name="${prefix}_sensor" type="imu">
+                <always_on>1</always_on>
+                <update_rate>30</update_rate>
+                <topic>${robot_ns}/${topic}</topic>
+            </sensor>
+        </gazebo>
+        </link>
+    </xacro:macro>
+
+</robot>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find speedy_description)/urdf/utils/utils.urdf.xacro"/>
+
+    <xacro:macro name="sensor_camera" params="prefix parent_link xyz_offset rpy robot_ns">
+        <joint name="${prefix}optical_frame_joint" type="fixed">
+            <origin rpy="${rpy}" xyz="${xyz_offset}"/>
+            <parent link="${parent_link}"/>
+            <child link="${prefix}camera_optical_frame"/>
+        </joint>
+
+        <link name="${prefix}camera_optical_frame">
+            <sensor name="${prefix}camera" type="camera">
+                <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+                <parent link="${prefix}camera_optical_frame"/>
+                <camera>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <hfov>1.57080</hfov>
+                </image>
+                </camera>
+            </sensor>
+        </link>
+    </xacro:macro>
+
+</robot>

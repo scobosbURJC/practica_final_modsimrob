@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find speedy_description)/urdf/utils/utils.urdf.xacro"/>
+
+    <xacro:macro name="revolute_arm" params="name parent_link lower_lim upper_lim xyz rpy material prefix">
+
+        <link name="${prefix}${name}_link">
+            <collision name="${name}_collision">
+                <origin rpy="0.00000 0.00000 -0.00000" xyz="0.00000 0.00000 0.00000"/>
+                <geometry>
+                    <cylinder radius="0.175" length="0.2"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <xacro:slender_rod_end_inertia m="2.0000" l="1.0000"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+                <mass value="2.00000"/>
+            </inertial>
+                <visual name="${name}">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+                <material name="${material}"/>
+                <geometry>
+                    <cylinder radius="0.175" length="0.2"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}${name}_joint" type="revolute">
+            <limit lower="${lower_lim}" upper="${upper_lim}" effort="0.00000" velocity="0.00000"/>
+            <origin rpy="${rpy}" xyz="${xyz}"/>
+            <parent link="${parent_link}"/>
+            <child link="${prefix}${name}_link"/>
+            <axis xyz="0.00000 0.00000 1.00000"/>
+        </joint>
+
+        <link name="${prefix}${name}_extension_link">
+            <collision name="${name}_extension_collision">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+                <geometry>
+                    <box size="1.00000 0.35000 0.20000"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <inertia ixx="0.06771" ixy="0.00000" ixz="0.00000" iyy="0.43333" iyz="-0.00000" izz="0.46771"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+                <mass value="5.00000"/>
+            </inertial>
+            <visual name="${name}_extension">
+                <origin rpy="0.00000 0.00000 -0.00000" xyz="0.00000 -0.00000 0.00000"/>
+                <material name="${material}"/>
+                <geometry>
+                    <box size="1.00000 0.35000 0.20000"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}${name}_extension_joint" type="fixed">
+            <origin rpy="0.00000 0.00000 -0.00000" xyz="0.50000 0.00000 -0.00000"/>
+            <parent link="${prefix}${name}_link"/>
+            <child link="${prefix}${name}_extension_link"/>
+        </joint>
+
+        <link name="${prefix}${name}_end_link">
+            <collision name="${name}_end_collision">
+                <origin rpy="0.00000 0.00000 -0.00000" xyz="0.00000 -0.00000 0.00000"/>
+                <geometry>
+                    <cylinder radius="0.175" length="0.2"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <inertia ixx="0.02188" ixy="0.00000" ixz="-0.00000" iyy="0.02188" iyz="0.00000" izz="0.03043"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+                <mass value="2.00000"/>
+            </inertial>
+            <visual name="${name}_end">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+                <material name="${material}"/>
+                <geometry>
+                    <cylinder radius="0.175" length="0.2"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}${name}_end_joint" type="fixed">
+            <origin rpy="0.00000 0.00000 -0.00000" xyz="0.50000 0.00000 -0.00000"/>
+            <parent link="${prefix}${name}_extension_link"/>
+            <child link="${prefix}${name}_end_link"/>
+        </joint>
+
+    </xacro:macro>
+
+    <xacro:macro name="scara" params="x y z roll pitch yaw first_joint_yaw column_height parent_link white_material purple_material prefix">
+        
+        <!-- BASE -->
+        <xacro:property name="scara_base_height" value="0.2"/>
+
+        <link name="${prefix}scara_base_link">
+            <collision name="scara_base_collision">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+                <geometry>
+                    <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.024.dae" scale="0.75000 0.75000 1.00000"/>
+                </geometry>
+            </collision>
+            <visual name="scara_base">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+                <material name="${white_material}"/>
+                <geometry>
+                    <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.024.dae" scale="0.75000 0.75000 1.00000"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}scara_base_joint" type="fixed">
+            <origin rpy="${roll} ${pitch} ${yaw}" xyz="${x} ${y} ${z}"/>
+            <parent link="${parent_link}"/>
+            <child link="${prefix}scara_base_link"/>
+        </joint>
+
+        <link name="${prefix}scara_base_column_link">
+            <collision name="scara_base_column_collision">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+                <geometry>
+                    <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.025.dae" scale="0.43750 0.43750 9.00000"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <inertia ixx="2.77607" ixy="0.00000" ixz="-0.00000" iyy="2.77607" iyz="0.00000" izz="0.15214"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+                <mass value="10.00000"/>
+            </inertial>
+            <visual name="scara_base_column">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+                <material name="${purple_material}"/>
+                <geometry>
+                    <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.025.dae" scale="0.43750 0.43750 9.00000"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}scara_base_column_joint" type="fixed">
+            <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 ${scara_base_height/2 + column_height/2}"/>
+            <parent link="${prefix}scara_base_link"/>
+            <child link="${prefix}scara_base_column_link"/>
+        </joint>
+
+        <!-- LINK 1 (ARM 1) -->
+
+        <xacro:revolute_arm name="scara_revolute_arm_1"
+                            parent_link="${parent_link}"
+                            lower_lim="${-PI}"
+                            upper_lim="${PI}"
+                            xyz="0.30000 0.00000 ${scara_base_height + column_height + z}"
+                            rpy="0.00000 0.00000 ${first_joint_yaw}"
+                            material="${white_material}"
+                            prefix="${prefix}"/>
+
+        <!-- LINK 2 (ARM 2) -->
+        
+        <xacro:revolute_arm name="scara_revolute_arm_2"
+                            parent_link="${prefix}scara_revolute_arm_1_link"
+                            lower_lim="-2.75"
+                            upper_lim="2.75"
+                            xyz="1.00000 0.00000 -0.2"
+                            rpy="0.00000 0.00000 0.00000"
+                            material="${purple_material}"
+                            prefix="${prefix}"/>
+        
+        <!-- LINK 3 (PRISMATIC) -->
+        
+        <link name="${prefix}scara_prismatic_link">
+            <collision name="scara_prismatic_collision">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+                <geometry>
+                    <cylinder radius="0.15" length="3.0"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <inertia ixx="5.28912" ixy="0.00000" ixz="0.00000" iyy="5.28912" iyz="-0.00000" izz="0.07825"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+                <mass value="7.00000"/>
+            </inertial>
+            <visual name="scara_prismatic">
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
+                <material name="${white_material}"/>
+                <geometry>
+                    <cylinder radius="0.15" length="3.0"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}scara_prismatic_joint" type="prismatic">
+            <limit lower="-1.30" upper="1.30" effort="0.00000" velocity="0.00000"/>
+            <origin rpy="0.00000 0.00000 0.00000" xyz="1.00000 -0.00000 -0.00000"/>
+            <parent link="${prefix}scara_revolute_arm_2_link"/>
+            <child link="${prefix}scara_prismatic_link"/>
+            <axis xyz="0.00000 0.00000 1.00000"/>
+        </joint>
+        
+        <!-- LINK 4 (WRIST) -->
+        
+        <link name="${prefix}scara_wrist_link">
+            <collision name="scara_wrist_collision">
+                <origin rpy="3.14159 0.00000 -0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+                <geometry>
+                    <cylinder radius="0.15" length="0.1"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <inertia ixx="0.00642" ixy="-0.00000" ixz="-0.00000" iyy="0.00642" iyz="-0.00000" izz="0.01118"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+                <mass value="1.00000"/>
+            </inertial>
+            <visual name="scara_wrist">
+                <origin rpy="0.00000 0.00000 -0.00000" xyz="0.00000 0.00000 -0.00000"/>
+                <material name="${purple_material}"/>
+                <geometry>
+                    <cylinder radius="0.15" length="0.1"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}scara_wrist_joint" type="revolute">
+            <limit lower="-${PI}" upper="${PI}" effort="0.00000" velocity="0.00000"/>
+            <origin rpy="-${PI} 0.00000 0.00000" xyz="0.00000 0.00000 -1.55000"/>
+            <parent link="${prefix}scara_prismatic_link"/>
+            <child link="${prefix}scara_wrist_link"/>
+            <axis xyz="0.00000 0.00000 1.00000"/>
+        </joint>
+
+    </xacro:macro>
+
+
+</robot>

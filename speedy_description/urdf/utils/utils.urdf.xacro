@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:property name="PI" value="3.1415926535897931"/>
+
+    <xacro:macro name="solid_cuboid_inertia" params="m w h d">
+        <inertia    ixx="${(m*(h*h+d*d))/12}"   ixy = "0"                   ixz = "0"
+                                                iyy="${(m*(w*w+h*h))/12}"   iyz = "0"
+                                                                            izz="${(m*(w*w+d*d))/12}"/>
+    </xacro:macro>
+
+    <xacro:macro name="slender_rod_end_inertia" params="m l">
+        <inertia    ixx="${(m*l*l)/3}"  ixy = "0"   ixz = "0"
+                                        iyy="0"     iyz = "0"
+                                                    izz="${(m*l*l)/3}"/>
+    </xacro:macro>
+
+</robot>

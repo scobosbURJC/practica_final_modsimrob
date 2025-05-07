@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot name="speedy" xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- INCLUDES -->
+    <xacro:include filename="$(find speedy_description)/urdf/base/robot_base.urdf.xacro"/>
+    <xacro:include filename="$(find speedy_description)/urdf/wheels/wheels_chasis.urdf.xacro"/>
+    <xacro:include filename="$(find speedy_description)/urdf/wheels/rover_wheel.urdf.xacro"/>
+    <xacro:include filename="$(find speedy_description)/urdf/utils/utils.urdf.xacro"/>
+    <xacro:include filename="$(find speedy_description)/urdf/arm/scara.urdf.xacro"/>
+    <xacro:include filename="$(find speedy_description)/urdf/arm/gripper.urdf.xacro"/>
+    <xacro:include filename="$(find speedy_description)/urdf/sensors/sensor_camera.urdf.xacro"/>
+    <xacro:include filename="$(find speedy_description)/urdf/sensors/sensor_imu.urdf.xacro"/>
+
+    <!-- ARGUMENTS -->
+    <xacro:arg name="robot_ns" default="speedy"/>
+    <xacro:arg name="prefix" default=""/>
+    <xacro:arg name="init_scara_yaw" default="${PI/2}"/>
+
+    <!-- PROPERTIES -->
+    <xacro:property name="right_wheels_chasis_offset"
+                    value="0.05549 -0.67542 0.00000"/>
+
+    <xacro:property name="left_wheels_chasis_offset"
+                    value="0.05549 0.67542 0.00000"/>
+
+    <xacro:property name="front_wheel_x_offset" value="1.3225"/>
+    <xacro:property name="mid_wheel_x_offset" value="-0.149999"/>
+    <xacro:property name="back_wheel_x_offset" value="-1.21623"/>
+
+    <xacro:property name="wheel_y_offset" value="0.850214"/>
+
+    <xacro:property name="wheel_z_offset" value="-1.08428"/>
+
+    <xacro:property name="fr_wheel_xyz"
+                    value="${front_wheel_x_offset} ${-wheel_y_offset} ${wheel_z_offset}"/>
+
+    <xacro:property name="mr_wheel_xyz"
+                    value="${mid_wheel_x_offset} ${-wheel_y_offset} ${wheel_z_offset}"/>
+
+    <xacro:property name="br_wheel_xyz"
+                    value="${back_wheel_x_offset} ${-wheel_y_offset} ${wheel_z_offset}"/>
+    
+    <xacro:property name="fl_wheel_xyz"
+                    value="${front_wheel_x_offset} ${wheel_y_offset} ${wheel_z_offset}"/>
+
+    <xacro:property name="ml_wheel_xyz"
+                    value="${mid_wheel_x_offset} ${wheel_y_offset} ${wheel_z_offset}"/>
+
+    <xacro:property name="bl_wheel_xyz"
+                    value="${back_wheel_x_offset} ${wheel_y_offset} ${wheel_z_offset}"/>
+
+    <xacro:property name="wheels_rpy"
+                    value="${PI/2} 0.00000 0.00000"/>
+
+    <!-- ROBOT PARTS -->
+    
+    <!-- base -->
+    <xacro:robot_base   base_height="1.47428"
+                        white_material="Material.008"
+                        prefix="$(arg prefix)"/>
+
+    <!-- wheels -->
+    <xacro:wheels_chasis  side="right"
+                          xyz="${right_wheels_chasis_offset}"
+                          parent_link="$(arg prefix)base_link"
+                          prefix="$(arg prefix)"/>
+
+    <xacro:rover_wheel  side="right"
+                        pos="front"
+                        parent_link="$(arg prefix)base_link"
+                        xyz="${fr_wheel_xyz}"
+                        rpy="${wheels_rpy}"
+                        wheel_material="Material.009"
+                        prefix="$(arg prefix)"/>
+
+    <xacro:rover_wheel  side="right" 
+                        pos="mid" 
+                        parent_link="$(arg prefix)base_link" 
+                        xyz="${mr_wheel_xyz}" 
+                        rpy="${wheels_rpy}"
+                        wheel_material="Material.009"
+                        prefix="$(arg prefix)"/>
+
+    <xacro:rover_wheel  side="right" 
+                        pos="back" 
+                        parent_link="$(arg prefix)base_link" 
+                        xyz="${br_wheel_xyz}" 
+                        rpy="${wheels_rpy}"
+                        wheel_material="Material.009"
+                        prefix="$(arg prefix)"/>
+
+    <xacro:wheels_chasis  side="left"
+                          xyz="${left_wheels_chasis_offset}"
+                          parent_link="$(arg prefix)base_link"
+                          prefix="$(arg prefix)"/>
+
+    <xacro:rover_wheel  side="left" 
+                        pos="front" 
+                        parent_link="$(arg prefix)base_link" 
+                        xyz="${fl_wheel_xyz}"
+                        rpy="${wheels_rpy}"
+                        wheel_material="Material.009"
+                        prefix="$(arg prefix)"/>
+
+    <xacro:rover_wheel  side="left" 
+                        pos="mid" 
+                        parent_link="$(arg prefix)base_link" 
+                        xyz="${ml_wheel_xyz}" 
+                        rpy="${wheels_rpy}"
+                        wheel_material="Material.009"
+                        prefix="$(arg prefix)"/>
+
+    <xacro:rover_wheel  side="left" 
+                        pos="back" 
+                        parent_link="$(arg prefix)base_link" 
+                        xyz="${bl_wheel_xyz}" 
+                        rpy="${wheels_rpy}"
+                        wheel_material="Material.009"
+                        prefix="$(arg prefix)"/>
+
+    <!-- arm -->
+    <xacro:scara    x="0.30000"
+                    y="0.00000"
+                    z="0.35000"
+                    roll="0.00000"
+                    pitch="0.00000"
+                    yaw="0.00000"
+                    first_joint_yaw="${PI/2}"
+                    column_height="1.8000"
+                    parent_link="$(arg prefix)base_link"
+                    white_material="Material.008"
+                    purple_material="Material.027"
+                    prefix="$(arg prefix)"/>
+
+    <xacro:gripper  z_offset="0.07500"
+                    parent_link="$(arg prefix)scara_wrist_link"
+                    white_material="Material.008"
+                    purple_material="Material.027"
+                    prefix="$(arg prefix)"/>
+
+    <!-- sensors -->
+    <xacro:sensor_camera  prefix="$(arg prefix)front_"
+                          parent_link="$(arg prefix)front_camera_objective_link"
+                          xyz_offset="0.09844 -0.00000 0.00000"
+                          rpy="0.00000 0.00000 0.0000"
+                          robot_ns="$(arg robot_ns)"/>
+
+    <xacro:sensor_camera  prefix="$(arg prefix)gripper_"
+                          parent_link="$(arg prefix)gripper_camera_link"
+                          xyz_offset="0.000000 -0.00000 0.00000"
+                          rpy="${-PI/2} 0.00000 ${-PI/2}"
+                          robot_ns="$(arg robot_ns)"/>
+
+    <xacro:sensor_imu prefix="$(arg prefix)base_"
+                      parent_link="$(arg prefix)base_link"
+                      xyz_offset="0.000000 -0.00000 0.00000"
+                      rpy="0.00000 0.00000 0.00000"
+                      robot_ns="$(arg robot_ns)"
+                      topic="base_imu"/>
+
+    <!-- GAZEBO ROS2 CONTROL -->
+    <!--xacro:include filename="$(find speedy_description)/urdf/ros2_control.urdf.xacro"/>
+    <xacro:arg name="config_controllers" default="$(find speedy_description)/config/speedy_controllers.yaml"/>
+    <xacro:arg name="update_rate" default="20"/>
+    <xacro:ros2_control/-->
+
+    <!-- MATERIALS -->
+    <material name="Material">
+      <color rgba="0.14902 0.14902 0.14902 1.00000"/>
+    </material>
+    <material name="Material.008">
+      <color rgba="1.00000 1.00000 1.00000 1.00000"/>
+    </material>
+    <material name="Material.009">
+        <color rgba="0.01176 0.01176 0.01176 1.00000"/>
+    </material>
+    <material name="Material.027">
+        <color rgba="0.38039 0.00000 0.80000 1.00000"/>
+    </material>
+
+</robot>

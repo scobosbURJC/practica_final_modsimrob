@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find speedy_description)/urdf/utils/utils.urdf.xacro"/>
+
+    <xacro:macro name="gripper_finger" params="side offset upper_lim parent_link material prefix">
+        <xacro:if value="${side == 'left'}">
+            <xacro:property name="axis" value="0.00000 1.00000 0.00000"/>
+        </xacro:if>
+
+        <xacro:if value="${side == 'right'}">
+            <xacro:property name="axis" value="0.00000 -1.00000 0.00000"/>
+        </xacro:if>
+
+        <link name="${prefix}${side}_gripper_finger_link">
+            <collision name="${side}_gripper_finger_collision">
+                <origin rpy="-0.00000 0.00000 -0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+                <geometry>
+                    <box size="0.30000 0.07500 0.25000"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <inertia ixx="0.00114" ixy="-0.00000" ixz="0.00000" iyy="0.00254" iyz="0.00000" izz="0.00159"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+                <mass value="0.20000"/>
+            </inertial>
+                <visual name="${side}_gripper_finger">
+                <origin rpy="0.00000 0.00000 -0.00000" xyz="-0.00000 0.00000 -0.00000"/>
+                <material name="${material}"/>
+                <geometry>
+                    <box size="0.30000 0.07500 0.25000"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}${side}_gripper_finger_joint" type="prismatic">
+            <limit lower="0.00000" upper="${upper_lim}" effort="0.00000" velocity="0.00000"/>
+            <origin rpy="1.57080 0.00000 0.00000" xyz="0.00000 -0.17500 ${offset}"/>
+            <parent link="${prefix}${parent_link}"/>
+            <child link="${prefix}${side}_gripper_finger_link"/>
+            <axis xyz="${axis}"/>
+        </joint>
+
+    </xacro:macro>
+
+    <xacro:macro name="gripper" params="z_offset parent_link white_material purple_material prefix">
+        <link name="${prefix}gripper_2_wrist_connection_link">
+            <collision name="gripper_2_wrist_connection_collision">
+                <origin rpy="3.14159 0.00000 -0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+                <geometry>
+                    <cylinder radius="0.1" length="0.05"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <inertia ixx="0.00135" ixy="-0.00000" ixz="0.00000" iyy="0.00135" iyz="-0.00000" izz="0.00248"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+                <mass value="0.50000"/>
+            </inertial>
+                <visual name="gripper_2_wrist_connection">
+                <origin rpy="0.00000 0.00000 -0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+                <material name="${white_material}"/>
+                <geometry>
+                    <cylinder radius="0.1" length="0.05"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}gripper_2_wrist_connection_joint" type="fixed">
+            <origin rpy="0.00000 0.00000 -0.00000" xyz="0.00000 0.00000 ${z_offset}"/>
+            <parent link="${parent_link}"/>
+            <child link="${prefix}gripper_2_wrist_connection_link"/>
+        </joint>
+
+        <link name="${prefix}gripper_base_link">
+            <collision name="gripper_base_collision">
+                <origin rpy="1.57080 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+                <geometry>
+                    <box size="0.30000 0.70000 0.10000"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <inertia ixx="0.04167" ixy="-0.00000" ixz="0.00000" iyy="0.00833" iyz="-0.00000" izz="0.04833"/>
+                <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+                <mass value="1.00000"/>
+            </inertial>
+            <visual name="gripper_base">
+                <origin rpy="1.57080 -0.00000 -0.00000" xyz="0.00000 0.00000 0.00000"/>
+                <material name="${purple_material}"/>
+                <geometry>
+                    <box size="0.30000 0.70000 0.10000"/>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="${prefix}gripper_base_link_joint" type="fixed">
+            <origin rpy="-1.57080 0.00000 -0.00000" xyz="0.00000 -0.00000 0.07500"/>
+            <parent link="${prefix}gripper_2_wrist_connection_link"/>
+            <child link="${prefix}gripper_base_link"/>
+        </joint>
+
+        <xacro:gripper_finger   side="right"
+                                offset="0.31251"
+                                upper_lim="0.28"
+                                parent_link="${prefix}gripper_base_link"
+                                material="${white_material}"
+                                prefix="${prefix}"/>
+
+        <xacro:gripper_finger   side="left"
+                                offset="-0.31251"
+                                upper_lim="0.28"
+                                parent_link="${prefix}gripper_base_link"
+                                material="${white_material}"
+                                prefix="${prefix}"/>
+
+    <link name="${prefix}gripper_camera_link"/>
+    <joint name="${prefix}gripper_camera_link_joint" type="fixed">
+        <origin rpy="-1.57080 -0.00000 -1.57080" xyz="0.00000 -0.05000 0.00000"/>
+        <parent link="${prefix}gripper_base_link"/>
+        <child link="${prefix}gripper_camera_link"/>
+    </joint>
+
+    </xacro:macro>
+
+</robot>
