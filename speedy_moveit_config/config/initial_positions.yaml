@@ -1,0 +1,9 @@
+# Default initial positions for speedy's ros2_control fake system
+
+initial_positions:
+  left_gripper_finger_joint: 0
+  right_gripper_finger_joint: 0
+  scara_prismatic_joint: 0
+  scara_revolute_arm_1_joint: 0
+  scara_revolute_arm_2_joint: 0
+  scara_wrist_joint: 0

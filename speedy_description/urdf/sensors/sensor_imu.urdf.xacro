@@ -10,15 +10,15 @@
             <child link="${prefix}imu_sensor_link"/>
         </joint>
 
-        <link name="${prefix}imu_sensor_link">
-            <gazebo reference="${prefix}imu_sensor_link">
-            <sensor name="${prefix}_sensor" type="imu">
+        <link name="${prefix}imu_sensor_link"/>
+
+        <gazebo reference="${prefix}imu_sensor_link">
+            <sensor name="${prefix}sensor" type="imu">
                 <always_on>1</always_on>
                 <update_rate>30</update_rate>
                 <topic>${robot_ns}/${topic}</topic>
             </sensor>
         </gazebo>
-        </link>
     </xacro:macro>
 
 </robot>

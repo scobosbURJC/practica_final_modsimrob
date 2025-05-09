@@ -12,8 +12,8 @@
             </hardware>
             <joint name="${frame_prefix}front_left_wheel_joint">
                 <command_interface name="velocity">
-                    <param name="min">-1</param>
-                    <param name="max">1</param>
+                    <param name="min">-5.1282</param>
+                    <param name="max">5.1282</param>
                 </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
@@ -21,8 +21,8 @@
             </joint>
             <joint name="${frame_prefix}front_right_wheel_joint">
                 <command_interface name="velocity">
-                    <param name="min">-1</param>
-                    <param name="max">1</param>
+                    <param name="min">-5.1282</param>
+                    <param name="max">5.1282</param>
                 </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
@@ -30,8 +30,8 @@
             </joint>
             <joint name="${frame_prefix}back_right_wheel_joint">
                 <command_interface name="velocity">
-                    <param name="min">-1</param>
-                    <param name="max">1</param>
+                    <param name="min">-5.1282</param>
+                    <param name="max">5.1282</param>
                 </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
@@ -39,8 +39,8 @@
             </joint>
             <joint name="${frame_prefix}back_left_wheel_joint">
                 <command_interface name="velocity">
-                    <param name="min">-1</param>
-                    <param name="max">1</param>
+                    <param name="min">-5.1282</param>
+                    <param name="max">5.1282</param>
                 </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
@@ -48,8 +48,8 @@
             </joint>
             <joint name="${frame_prefix}mid_right_wheel_joint">
                 <command_interface name="velocity">
-                    <param name="min">-1</param>
-                    <param name="max">1</param>
+                    <param name="min">-5.1282</param>
+                    <param name="max">5.1282</param>
                 </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
@@ -57,8 +57,8 @@
             </joint>
             <joint name="${frame_prefix}mid_left_wheel_joint">
                 <command_interface name="velocity">
-                    <param name="min">-1</param>
-                    <param name="max">1</param>
+                    <param name="min">-5.1282</param>
+                    <param name="max">5.1282</param>
                 </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>

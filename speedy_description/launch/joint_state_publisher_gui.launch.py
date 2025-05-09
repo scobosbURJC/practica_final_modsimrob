@@ -9,7 +9,7 @@ from launch_ros.substitutions import FindPackageShare
 import launch_ros.descriptions
 
 def generate_launch_description():
-    namespace = LaunchConfiguration("namespace", default="speedy/")
+    namespace = LaunchConfiguration("namespace", default="")
 
     joint_state_publisher_gui_node = Node(
         package='joint_state_publisher_gui',

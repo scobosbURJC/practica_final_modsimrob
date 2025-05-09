@@ -3,17 +3,6 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:macro name="rover_wheel" params="side pos parent_link xyz rpy wheel_material prefix">
 
-    <!--
-      rover_wheel
-
-      PARAMS
-        · side: right/left
-        · pos: front/mid/back
-        · parent_link: name of parent link
-        · xyz: x,y,z position of the wheel
-        · rpy: x,y,z rotation of the wheel
-    -->
-
     <xacro:if value="${side != 'left' and side != 'right'}">
       <xacro:error message="'side' parameter must be 'right' or 'left'."/>
     </xacro:if>
@@ -22,19 +11,17 @@
       <xacro:error message="'pos' parameter must be 'front', 'mid' or 'back'."/>
     </xacro:if>
 
-    <xacro:property name="axis_xyz" value="0.00000 0.00000 -1.00000"/>
-
     <link name="${pos}_${side}_wheel_link">
       <collision name="${pos}_${side}_wheel_collision">
         <origin rpy="0.00000 -0.00000 -0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Torus.001.dae" scale="0.66102 0.66102 0.58333"/>
+          <mesh filename="package://speedy_description/meshes/dae/Torus.001.dae" scale="0.66102 0.66102 0.58333"/>
         </geometry>
         <surface>
           <friction>
             <ode>
-              <mu>1.000000</mu>
-              <mu2>1.000000</mu2>
+              <mu>20.000000</mu>
+              <mu2>20.000000</mu2>
               <fdir1>0.0000 0.0000 1.0000</fdir1>
               <slip1>0.50000</slip1>
               <slip2>0.50000</slip2>
@@ -51,7 +38,7 @@
         <origin rpy="0.00000 -0.00000 -0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
         <material name="${wheel_material}"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Torus.001.dae" scale="0.66102 0.66102 0.58333"/>
+          <mesh filename="package://speedy_description/meshes/dae/Torus.001.dae" scale="0.66102 0.66102 0.58333"/>
         </geometry>
       </visual>
     </link>
@@ -60,23 +47,27 @@
       <parent link="${parent_link}"/>
       <child link="${pos}_${side}_wheel_link"/>
       <origin xyz="${xyz}" rpy="${rpy}"/>
-      <axis xyz="${axis_xyz}"/>
-      <limit velocity="1.0" effort="5.0"/>
+      <axis xyz="0.00000 0.00000 1.00000"/>
+      <limit velocity="5.1282" effort="1000.0"/>
     </joint>
 
     <transmission name="${pos}_${side}_wheel_joint_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${pos}_${side}_wheel_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
       </joint>
       <actuator name="${pos}_${side}_wheel_joint_motor">
-        <mechanicalReduction></mechanicalReduction>
+        <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
 
     <gazebo reference="${pos}_${side}_wheel_link">
       <mu1>5</mu1>
       <mu2>5</mu2>
+      <kp>2.72e6</kp>
+      <kd>8.25e1</kd>
+      <fdir1>0 0 0</fdir1>
+      <maxContacts>4</maxContacts>
     </gazebo>
 
   </xacro:macro>

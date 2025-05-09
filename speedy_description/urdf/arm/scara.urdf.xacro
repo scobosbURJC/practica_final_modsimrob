@@ -27,7 +27,7 @@
         </link>
 
         <joint name="${prefix}${name}_joint" type="revolute">
-            <limit lower="${lower_lim}" upper="${upper_lim}" effort="0.00000" velocity="0.00000"/>
+            <limit lower="${lower_lim}" upper="${upper_lim}" effort="1000.00000" velocity="100.00000"/>
             <origin rpy="${rpy}" xyz="${xyz}"/>
             <parent link="${parent_link}"/>
             <child link="${prefix}${name}_link"/>
@@ -99,14 +99,14 @@
             <collision name="scara_base_collision">
                 <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
                 <geometry>
-                    <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.024.dae" scale="0.75000 0.75000 1.00000"/>
+                    <mesh filename="package://speedy_description/meshes/dae/Cylinder.024.dae" scale="0.75000 0.75000 1.00000"/>
                 </geometry>
             </collision>
             <visual name="scara_base">
                 <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
                 <material name="${white_material}"/>
                 <geometry>
-                    <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.024.dae" scale="0.75000 0.75000 1.00000"/>
+                    <mesh filename="package://speedy_description/meshes/dae/Cylinder.024.dae" scale="0.75000 0.75000 1.00000"/>
                 </geometry>
             </visual>
         </link>
@@ -121,7 +121,7 @@
             <collision name="scara_base_column_collision">
                 <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
                 <geometry>
-                    <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.025.dae" scale="0.43750 0.43750 9.00000"/>
+                    <mesh filename="package://speedy_description/meshes/dae/Cylinder.025.dae" scale="0.43750 0.43750 9.00000"/>
                 </geometry>
             </collision>
             <inertial>
@@ -133,7 +133,7 @@
                 <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
                 <material name="${purple_material}"/>
                 <geometry>
-                    <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.025.dae" scale="0.43750 0.43750 9.00000"/>
+                    <mesh filename="package://speedy_description/meshes/dae/Cylinder.025.dae" scale="0.43750 0.43750 9.00000"/>
                 </geometry>
             </visual>
         </link>
@@ -190,7 +190,7 @@
         </link>
 
         <joint name="${prefix}scara_prismatic_joint" type="prismatic">
-            <limit lower="-1.30" upper="1.30" effort="0.00000" velocity="0.00000"/>
+            <limit lower="-1.30" upper="1.30" effort="1000.00000" velocity="100.00000"/>
             <origin rpy="0.00000 0.00000 0.00000" xyz="1.00000 -0.00000 -0.00000"/>
             <parent link="${prefix}scara_revolute_arm_2_link"/>
             <child link="${prefix}scara_prismatic_link"/>
@@ -221,7 +221,7 @@
         </link>
 
         <joint name="${prefix}scara_wrist_joint" type="revolute">
-            <limit lower="-${PI}" upper="${PI}" effort="0.00000" velocity="0.00000"/>
+            <limit lower="-${PI}" upper="${PI}" effort="1000.00000" velocity="100.00000"/>
             <origin rpy="-${PI} 0.00000 0.00000" xyz="0.00000 0.00000 -1.55000"/>
             <parent link="${prefix}scara_prismatic_link"/>
             <child link="${prefix}scara_wrist_link"/>

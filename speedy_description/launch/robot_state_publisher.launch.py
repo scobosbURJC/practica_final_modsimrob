@@ -11,8 +11,8 @@ import launch_ros.descriptions
 def generate_launch_description():
     # Declare arguments
     description_file = LaunchConfiguration("description_file", default="speedy.urdf.xacro")
-    prefix = LaunchConfiguration("prefix", default="speedy/")
-    namespace = LaunchConfiguration("namespace", default="speedy")
+    prefix = LaunchConfiguration("prefix", default="")
+    namespace = LaunchConfiguration("namespace", default="")
     use_sim_time = LaunchConfiguration('use_sim_time' , default='true')
 
     robot_description_content = Command([

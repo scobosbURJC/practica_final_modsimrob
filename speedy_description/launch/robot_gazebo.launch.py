@@ -13,7 +13,7 @@ from moveit_configs_utils import MoveItConfigsBuilder
 # Function to start the Gazebo server and client
 def start_gzserver(context, *args, **kwargs):  
     # TBD: Define pkg_path
-    pkg_path = get_package_share_directory('urjc-excavation-world')
+    pkg_path = get_package_share_directory('urjc_excavation_world')
 
     world_name = LaunchConfiguration('world_name').perform(context)
     # TBD: Define world path
@@ -58,7 +58,8 @@ def get_model_paths(packages_names):
 
 # Launch description
 def generate_launch_description():
-    #moveit_config = MoveItConfigsBuilder("robot", package_name="TBD").to_moveit_configs()
+    moveit_config = MoveItConfigsBuilder("speedy", package_name="speedy_moveit_config").to_moveit_configs()
+   
     declare_sim_time = DeclareLaunchArgument(
         'use_sim_time', default_value='true',
         description="use_sim_time simulation parameter"
@@ -77,15 +78,9 @@ def generate_launch_description():
 
     model_path = get_model_paths(['speedy_description'])
 
-    #speedy_description_launcher = IncludeLaunchDescription(
-    #   PathJoinSubstitution(
-    #       [FindPackageShare("robot_moveit_config"), "launch", "rsp.launch.py"]
-    #   ),
-    #)
-
     speedy_description_launcher = IncludeLaunchDescription(
        PathJoinSubstitution(
-           [FindPackageShare("speedy_description"), "launch", "robot_state_publisher.launch.py"]
+           [FindPackageShare("speedy_moveit_config"), "launch", "rsp.launch.py"]
        ),
     )
 
@@ -96,6 +91,7 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         name='rviz2',
+        output='log',
         parameters=[
             {
                 'config_file': join(
@@ -103,12 +99,23 @@ def generate_launch_description():
                 ),
                 'use_sim_time': True,
             }
-        ],
-        output='screen'
+        ]
     )
 
     # TBD: robot spawner
-
+    gazebo_spawn_robot = Node(
+        package='ros_gz_sim',
+        executable='create',
+        output='screen',
+        arguments=[
+            '-name', 'speedy',
+            '-topic', 'robot_description',
+            '-use_sim_time', 'True',
+            '-x', '0',
+            '-y', '0',
+            '-z', '1.8'
+        ],
+    )
 
     # Bridge
     bridge = Node(
@@ -118,7 +125,7 @@ def generate_launch_description():
         parameters=[
             {
                 'config_file': join(
-                    pkg_path, 'config', 'robot_bridge.yaml'
+                    pkg_path, 'config', 'speedy_bridge.yaml'
                 ),
                 'use_sim_time': True,
             }
@@ -132,7 +139,7 @@ def generate_launch_description():
         executable="image_bridge",
         arguments=[
             "/front_camera/image",
-            "/arm_camera/image"
+            "/gripper_camera/image"
         ],
         output="screen",
         parameters=[
@@ -151,7 +158,7 @@ def generate_launch_description():
             {
                 "use_sim_time": True,
             }],
-        remappings={('cmd_vel_out', '/robot_base_control/cmd_vel'),
+        remappings={('cmd_vel_out', '/speedy_base_control/cmd_vel'),
                     ('cmd_vel_in', '/cmd_vel')},
     )
 
@@ -165,6 +172,9 @@ def generate_launch_description():
     ld.add_action(gz_image_bridge_node)
     ld.add_action(start_gazebo_server_cmd)
     # TBD: RViz config and launching
+    ld.add_action(rviz_cmd)
     # TBD: robot spawner 
+    ld.add_action(gazebo_spawn_robot)
     ld.add_action(twist_stamped)
+
     return ld

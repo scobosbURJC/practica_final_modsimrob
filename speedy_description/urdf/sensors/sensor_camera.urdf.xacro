@@ -22,7 +22,7 @@
             <sensor name="${prefix}sensor" type="camera">
                 <visualize>true</visualize>
                 <update_rate>30</update_rate>
-                <topic>/${robot_ns}/image</topic>
+                <topic>${robot_ns}/${prefix}camera/image</topic>
                 <camera>
                     <horizontal_fov>${radians(float(90))}</horizontal_fov>
                     <image>

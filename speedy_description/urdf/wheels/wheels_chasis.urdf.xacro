@@ -26,7 +26,7 @@
       <collision name="${pos}_${side}_wheel_top_support_collision">
         <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.00000 0.00000 -0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cube.018.dae" scale="0.10000 0.04007 0.30000"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cube.018.dae" scale="0.10000 0.04007 0.30000"/>
         </geometry>
       </collision>
       <inertial>
@@ -55,7 +55,7 @@
       <collision name="${pos}_${side}_wheel_lateral_sup_collision">
         <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cube.003.dae" scale="0.10000 0.26800 0.03775"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cube.003.dae" scale="0.10000 0.26800 0.03775"/>
         </geometry>
       </collision>
       <inertial>
@@ -84,7 +84,7 @@
       <collision name="${pos}_${side}_wheel_axis_collision">
         <origin rpy="${PI/2} -0.00000 -0.00000" xyz="-0.00000 0.00000 -0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.003.dae" scale="0.70000 0.70000 2.00000"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.003.dae" scale="0.70000 0.70000 2.00000"/>
         </geometry>
       </collision>
       <inertial>
@@ -95,7 +95,7 @@
       <visual name="${pos}_${side}_wheel_axis">
         <origin rpy="${PI/2} -0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.003.dae" scale="0.70000 0.70000 2.00000"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.003.dae" scale="0.70000 0.70000 2.00000"/>
         </geometry>
       </visual>
     </link>
@@ -132,7 +132,7 @@
       <collision name="${prefix}${side}_wheels_base_support_collision">
         <origin rpy="-0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.022.dae" scale="1.00000 1.00000 1.92308"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.022.dae" scale="1.00000 1.00000 1.92308"/>
         </geometry>
       </collision>
       <inertial>
@@ -144,7 +144,7 @@
         <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
         <material name="Material.016"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.022.dae" scale="1.00000 1.00000 1.92308"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.022.dae" scale="1.00000 1.00000 1.92308"/>
         </geometry>
       </visual>
     </link>
@@ -158,7 +158,7 @@
       <collision name="${side}_legs_union_collision">
         <origin rpy="-0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.006.dae" scale="1.00000 1.00000 1.00000"/>
+          <mesh filename="package://speedy_description/meshes/dae/Sphere.006.dae" scale="1.00000 1.00000 1.00000"/>
         </geometry>
       </collision>
       <inertial>
@@ -170,7 +170,7 @@
         <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
         <material name="Material.016"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.006.dae" scale="1.00000 1.00000 1.00000"/>
+          <mesh filename="package://speedy_description/meshes/dae/Sphere.006.dae" scale="1.00000 1.00000 1.00000"/>
         </geometry>
       </visual>
     </link>
@@ -184,7 +184,7 @@
       <collision name="mid_back_${side}_leg_collision">
         <origin rpy="0.00000 -0.00000 -0.00000" xyz="-0.00000 0.00000 0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.dae" scale="0.05000 0.05000 0.38165"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.dae" scale="0.05000 0.05000 0.38165"/>
         </geometry>
       </collision>
       <inertial>
@@ -196,7 +196,7 @@
         <origin rpy="-0.00000 0.00000 -0.00000" xyz="-0.00000 0.00000 0.00000"/>
         <material name="Material"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.dae" scale="0.05000 0.05000 0.38165"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.dae" scale="0.05000 0.05000 0.38165"/>
         </geometry>
       </visual>
     </link>
@@ -210,7 +210,7 @@
       <collision name="${side}_mid_back_legs_support_collision">
         <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.dae" scale="0.08862 0.08862 0.08862"/>
+          <mesh filename="package://speedy_description/meshes/dae/Sphere.dae" scale="0.08862 0.08862 0.08862"/>
         </geometry>
       </collision>
       <inertial>
@@ -222,7 +222,7 @@
         <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
         <material name="Material.002"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Sphere.dae" scale="0.08862 0.08862 0.08862"/>
+          <mesh filename="package://speedy_description/meshes/dae/Sphere.dae" scale="0.08862 0.08862 0.08862"/>
         </geometry>
       </visual>
     </link>
@@ -240,7 +240,7 @@
       <collision name="back_${side}_leg_collision">
         <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.006.dae" scale="0.05000 0.05000 0.39665"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.006.dae" scale="0.05000 0.05000 0.39665"/>
         </geometry>
       </collision>
 
@@ -253,7 +253,7 @@
         <origin rpy="-0.00000 0.00000 -0.00000" xyz="-0.00000 0.00000 -0.00000"/>
         <material name="Material"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.006.dae" scale="0.05000 0.05000 0.39665"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.006.dae" scale="0.05000 0.05000 0.39665"/>
         </geometry>
       </visual>
     </link>
@@ -277,7 +277,7 @@
       <collision name="front_${side}_leg_collision">
         <origin rpy="-0.00000 -0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.019.dae" scale="0.83333 0.83333 11.25616"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.019.dae" scale="0.83333 0.83333 11.25616"/>
         </geometry>
       </collision>
       <inertial>
@@ -289,7 +289,7 @@
         <origin rpy="-0.00000 -0.00000 0.00000" xyz="-0.00000 0.00000 -0.00000"/>
         <material name="Material.010"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.019.dae" scale="0.83333 0.83333 11.25615"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.019.dae" scale="0.83333 0.83333 11.25615"/>
         </geometry>
       </visual>
     </link>
@@ -312,7 +312,7 @@
       <collision name="mid_${side}_leg_collision">
         <origin rpy="-0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 0.00000"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.008.dae" scale="0.05000 0.05000 0.38165"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.008.dae" scale="0.05000 0.05000 0.38165"/>
         </geometry>
       </collision>
       <inertial>
@@ -324,7 +324,7 @@
         <origin rpy="-0.00000 -0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
         <material name="Material"/>
         <geometry>
-          <mesh filename="file://$(find speedy_description)/meshes/dae/Cylinder.008.dae" scale="0.05000 0.05000 0.38165"/>
+          <mesh filename="package://speedy_description/meshes/dae/Cylinder.008.dae" scale="0.05000 0.05000 0.38165"/>
         </geometry>
       </visual>
     </link>

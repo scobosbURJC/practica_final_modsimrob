@@ -12,7 +12,7 @@
     <xacro:include filename="$(find speedy_description)/urdf/sensors/sensor_imu.urdf.xacro"/>
 
     <!-- ARGUMENTS -->
-    <xacro:arg name="robot_ns" default="speedy"/>
+    <xacro:arg name="robot_ns" default=""/>
     <xacro:arg name="prefix" default=""/>
     <xacro:arg name="init_scara_yaw" default="${PI/2}"/>
 
@@ -49,8 +49,11 @@
     <xacro:property name="bl_wheel_xyz"
                     value="${back_wheel_x_offset} ${wheel_y_offset} ${wheel_z_offset}"/>
 
-    <xacro:property name="wheels_rpy"
-                    value="${PI/2} 0.00000 0.00000"/>
+    <xacro:property name="right_wheels_rpy"
+                    value="${-PI/2} 0.00000 0.0000"/>
+
+    <xacro:property name="left_wheels_rpy"
+                    value="${PI/2} 0.00000 0.0000"/>
 
     <!-- ROBOT PARTS -->
     
@@ -69,7 +72,7 @@
                         pos="front"
                         parent_link="$(arg prefix)base_link"
                         xyz="${fr_wheel_xyz}"
-                        rpy="${wheels_rpy}"
+                        rpy="${right_wheels_rpy}"
                         wheel_material="Material.009"
                         prefix="$(arg prefix)"/>
 
@@ -77,7 +80,7 @@
                         pos="mid" 
                         parent_link="$(arg prefix)base_link" 
                         xyz="${mr_wheel_xyz}" 
-                        rpy="${wheels_rpy}"
+                        rpy="${right_wheels_rpy}"
                         wheel_material="Material.009"
                         prefix="$(arg prefix)"/>
 
@@ -85,7 +88,7 @@
                         pos="back" 
                         parent_link="$(arg prefix)base_link" 
                         xyz="${br_wheel_xyz}" 
-                        rpy="${wheels_rpy}"
+                        rpy="${right_wheels_rpy}"
                         wheel_material="Material.009"
                         prefix="$(arg prefix)"/>
 
@@ -98,7 +101,7 @@
                         pos="front" 
                         parent_link="$(arg prefix)base_link" 
                         xyz="${fl_wheel_xyz}"
-                        rpy="${wheels_rpy}"
+                        rpy="${left_wheels_rpy}"
                         wheel_material="Material.009"
                         prefix="$(arg prefix)"/>
 
@@ -106,15 +109,15 @@
                         pos="mid" 
                         parent_link="$(arg prefix)base_link" 
                         xyz="${ml_wheel_xyz}" 
-                        rpy="${wheels_rpy}"
+                        rpy="${left_wheels_rpy}"
                         wheel_material="Material.009"
                         prefix="$(arg prefix)"/>
 
     <xacro:rover_wheel  side="left" 
                         pos="back" 
                         parent_link="$(arg prefix)base_link" 
-                        xyz="${bl_wheel_xyz}" 
-                        rpy="${wheels_rpy}"
+                        xyz="${bl_wheel_xyz}"
+                        rpy="${left_wheels_rpy}"
                         wheel_material="Material.009"
                         prefix="$(arg prefix)"/>
 
@@ -160,7 +163,7 @@
                       xyz_offset="0.000000 -0.00000 0.00000"
                       rpy="0.00000 0.00000 0.00000"
                       robot_ns="$(arg robot_ns)"
-                      topic="base_imu"/>
+                      topic="base_imu/data"/>
 
     <!-- GAZEBO ROS2 CONTROL -->
     <xacro:include filename="$(find speedy_description)/urdf/ros2_control.urdf.xacro"/>
