@@ -1,14 +1,16 @@
 Panels:
   - Class: rviz_common/Displays
-    Help Height: 78
+    Help Height: 0
     Name: Displays
     Property Tree Widget:
       Expanded:
         - /Global Options1
         - /Status1
         - /TF1
-      Splitter Ratio: 0.5176470875740051
-    Tree Height: 476
+        - /TF1/Tree1
+        - /RobotModel1
+      Splitter Ratio: 0.8294117450714111
+    Tree Height: 140
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -55,246 +57,13 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        antena_stem_link:
-          Value: true
-        antena_top_link:
-          Value: true
-        back_left_leg_link:
-          Value: true
-        back_left_wheel_axis_link:
-          Value: true
-        back_left_wheel_lateral_sup_link:
-          Value: true
-        back_left_wheel_link:
-          Value: true
-        back_left_wheel_top_support_link:
-          Value: true
-        back_right_leg_link:
-          Value: true
-        back_right_wheel_axis_link:
-          Value: true
-        back_right_wheel_lateral_sup_link:
-          Value: true
-        back_right_wheel_link:
-          Value: true
-        back_right_wheel_top_support_link:
-          Value: true
-        base_footprint:
-          Value: true
-        base_imu_sensor_link:
-          Value: true
-        base_link:
-          Value: true
-        basket_wall_1_link:
-          Value: true
-        basket_wall_2_link:
-          Value: true
-        basket_wall_3_link:
-          Value: true
-        basket_wall_4_link:
-          Value: true
-        camera_2_link:
-          Value: true
-        front_camera_lens_link:
-          Value: true
-        front_camera_objective_link:
-          Value: true
-        front_camera_optical_frame:
-          Value: true
-        front_left_leg_link:
-          Value: true
-        front_left_wheel_axis_link:
-          Value: true
-        front_left_wheel_lateral_sup_link:
-          Value: true
-        front_left_wheel_link:
-          Value: true
-        front_left_wheel_top_support_link:
-          Value: true
-        front_right_leg_link:
-          Value: true
-        front_right_wheel_axis_link:
-          Value: true
-        front_right_wheel_lateral_sup_link:
-          Value: true
-        front_right_wheel_link:
-          Value: true
-        front_right_wheel_top_support_link:
-          Value: true
-        gripper_2_wrist_connection_link:
-          Value: true
-        gripper_base_link:
-          Value: true
-        gripper_camera_link:
-          Value: true
-        gripper_camera_optical_frame:
-          Value: true
-        head_link:
-          Value: true
-        left_gripper_finger_link:
-          Value: true
-        left_legs_union_link:
-          Value: true
-        left_mid_back_legs_support_link:
-          Value: true
-        left_wheels_base_support_link:
-          Value: true
-        mid_back_left_leg_link:
-          Value: true
-        mid_back_right_leg_link:
-          Value: true
-        mid_left_leg_link:
-          Value: true
-        mid_left_wheel_axis_link:
-          Value: true
-        mid_left_wheel_lateral_sup_link:
-          Value: true
-        mid_left_wheel_link:
-          Value: true
-        mid_left_wheel_top_support_link:
-          Value: true
-        mid_right_leg_link:
-          Value: true
-        mid_right_wheel_axis_link:
-          Value: true
-        mid_right_wheel_lateral_sup_link:
-          Value: true
-        mid_right_wheel_link:
-          Value: true
-        mid_right_wheel_top_support_link:
-          Value: true
-        neck_link:
-          Value: true
-        right_gripper_finger_link:
-          Value: true
-        right_legs_union_link:
-          Value: true
-        right_mid_back_legs_support_link:
-          Value: true
-        right_wheels_base_support_link:
-          Value: true
-        scara_base_column_link:
-          Value: true
-        scara_base_link:
-          Value: true
-        scara_prismatic_link:
-          Value: true
-        scara_revolute_arm_1_end_link:
-          Value: true
-        scara_revolute_arm_1_extension_link:
-          Value: true
-        scara_revolute_arm_1_link:
-          Value: true
-        scara_revolute_arm_2_end_link:
-          Value: true
-        scara_revolute_arm_2_extension_link:
-          Value: true
-        scara_revolute_arm_2_link:
-          Value: true
-        scara_wrist_link:
-          Value: true
-      Marker Scale: 0.5
+      Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        base_footprint:
-          base_link:
-            back_left_wheel_link:
-              {}
-            back_right_wheel_link:
-              {}
-            base_imu_sensor_link:
-              {}
-            basket_wall_1_link:
-              {}
-            basket_wall_2_link:
-              {}
-            basket_wall_3_link:
-              {}
-            basket_wall_4_link:
-              {}
-            front_left_wheel_link:
-              {}
-            front_right_wheel_link:
-              {}
-            left_wheels_base_support_link:
-              left_legs_union_link:
-                front_left_leg_link:
-                  front_left_wheel_top_support_link:
-                    front_left_wheel_lateral_sup_link:
-                      front_left_wheel_axis_link:
-                        {}
-                mid_back_left_leg_link:
-                  left_mid_back_legs_support_link:
-                    back_left_leg_link:
-                      back_left_wheel_top_support_link:
-                        back_left_wheel_lateral_sup_link:
-                          back_left_wheel_axis_link:
-                            {}
-                    mid_left_leg_link:
-                      mid_left_wheel_top_support_link:
-                        mid_left_wheel_lateral_sup_link:
-                          mid_left_wheel_axis_link:
-                            {}
-            mid_left_wheel_link:
-              {}
-            mid_right_wheel_link:
-              {}
-            neck_link:
-              head_link:
-                antena_stem_link:
-                  antena_top_link:
-                    {}
-                camera_2_link:
-                  {}
-                front_camera_lens_link:
-                  {}
-                front_camera_objective_link:
-                  front_camera_optical_frame:
-                    {}
-            right_wheels_base_support_link:
-              right_legs_union_link:
-                front_right_leg_link:
-                  front_right_wheel_top_support_link:
-                    front_right_wheel_lateral_sup_link:
-                      front_right_wheel_axis_link:
-                        {}
-                mid_back_right_leg_link:
-                  right_mid_back_legs_support_link:
-                    back_right_leg_link:
-                      back_right_wheel_top_support_link:
-                        back_right_wheel_lateral_sup_link:
-                          back_right_wheel_axis_link:
-                            {}
-                    mid_right_leg_link:
-                      mid_right_wheel_top_support_link:
-                        mid_right_wheel_lateral_sup_link:
-                          mid_right_wheel_axis_link:
-                            {}
-            scara_base_link:
-              scara_base_column_link:
-                {}
-            scara_revolute_arm_1_link:
-              scara_revolute_arm_1_extension_link:
-                scara_revolute_arm_1_end_link:
-                  {}
-              scara_revolute_arm_2_link:
-                scara_prismatic_link:
-                  scara_wrist_link:
-                    gripper_2_wrist_connection_link:
-                      gripper_base_link:
-                        gripper_camera_link:
-                          gripper_camera_optical_frame:
-                            {}
-                        left_gripper_finger_link:
-                          {}
-                        right_gripper_finger_link:
-                          {}
-                scara_revolute_arm_2_extension_link:
-                  scara_revolute_arm_2_end_link:
-                    {}
+        {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -315,345 +84,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        antena_stem_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        antena_top_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_left_leg_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_left_wheel_axis_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_left_wheel_lateral_sup_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_left_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_left_wheel_top_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_right_leg_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_right_wheel_axis_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_right_wheel_lateral_sup_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_right_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_right_wheel_top_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_imu_sensor_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        basket_wall_1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        basket_wall_2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        basket_wall_3_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        basket_wall_4_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_camera_lens_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        front_camera_objective_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_camera_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        front_left_leg_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_left_wheel_axis_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_left_wheel_lateral_sup_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_left_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_left_wheel_top_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_leg_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_wheel_axis_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_wheel_lateral_sup_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_wheel_top_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_2_wrist_connection_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        gripper_camera_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        head_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_gripper_finger_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_legs_union_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_mid_back_legs_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_wheels_base_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_back_left_leg_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_back_right_leg_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_left_leg_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_left_wheel_axis_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_left_wheel_lateral_sup_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_left_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_left_wheel_top_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_right_leg_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_right_wheel_axis_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_right_wheel_lateral_sup_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_right_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mid_right_wheel_top_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        neck_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_gripper_finger_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_legs_union_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_mid_back_legs_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_wheels_base_support_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_base_column_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_prismatic_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_revolute_arm_1_end_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_revolute_arm_1_extension_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_revolute_arm_1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_revolute_arm_2_end_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_revolute_arm_2_extension_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_revolute_arm_2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        scara_wrist_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
@@ -662,10 +92,120 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: front_cam_img
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /front_camera/image
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: gripper_cam_img
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /gripper_camera/image
+      Value: true
+    - Acceleration_Scaling_Factor: 0.1
+      Class: moveit_rviz_plugin/MotionPlanning
+      Enabled: true
+      Move Group Namespace: ""
+      MoveIt_Allow_Approximate_IK: false
+      MoveIt_Allow_External_Program: false
+      MoveIt_Allow_Replanning: false
+      MoveIt_Allow_Sensor_Positioning: false
+      MoveIt_Planning_Attempts: 10
+      MoveIt_Planning_Time: 5
+      MoveIt_Use_Cartesian_Path: false
+      MoveIt_Use_Constraint_Aware_IK: false
+      MoveIt_Workspace:
+        Center:
+          X: 0
+          Y: 0
+          Z: 0
+        Size:
+          X: 2
+          Y: 2
+          Z: 2
+      Name: MotionPlanning
+      Planned Path:
+        Color Enabled: false
+        Interrupt Display: false
+        Links:
+          All Links Enabled: true
+          Expand Joint Details: false
+          Expand Link Details: false
+          Expand Tree: false
+          Link Tree Style: Links in Alphabetic Order
+        Loop Animation: false
+        Robot Alpha: 0.5
+        Robot Color: 150; 50; 150
+        Show Robot Collision: false
+        Show Robot Visual: true
+        Show Trail: false
+        State Display Time: 3x
+        Trail Step Size: 1
+        Trajectory Topic: /display_planned_path
+        Use Sim Time: false
+      Planning Metrics:
+        Payload: 1
+        Show Joint Torques: false
+        Show Manipulability: false
+        Show Manipulability Index: false
+        Show Weight Limit: false
+        TextHeight: 0.07999999821186066
+      Planning Request:
+        Colliding Link Color: 255; 0; 0
+        Goal State Alpha: 1
+        Goal State Color: 250; 128; 0
+        Interactive Marker Size: 0
+        Joint Violation Color: 255; 0; 255
+        Planning Group: gripper
+        Query Goal State: true
+        Query Start State: false
+        Show Workspace: false
+        Start State Alpha: 1
+        Start State Color: 0; 255; 0
+      Planning Scene Topic: /monitored_planning_scene
+      Robot Description: robot_description
+      Scene Geometry:
+        Scene Alpha: 0.8999999761581421
+        Scene Color: 50; 230; 50
+        Scene Display Time: 0.009999999776482582
+        Show Scene Geometry: true
+        Voxel Coloring: Z-Axis
+        Voxel Rendering: Occupied Voxels
+      Scene Robot:
+        Attached Body Color: 150; 50; 150
+        Links:
+          All Links Enabled: true
+          Expand Joint Details: false
+          Expand Link Details: false
+          Expand Tree: false
+          Link Tree Style: Links in Alphabetic Order
+        Robot Alpha: 1
+        Show Robot Collision: false
+        Show Robot Visual: true
+      Value: true
+      Velocity_Scaling_Factor: 0.1
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_footprint
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -708,33 +248,37 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 6.657135009765625
+      Distance: 14.98752212524414
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.27409037947654724
-        Y: 0.538673996925354
-        Z: -0.7851229310035706
+        X: 1.317569613456726
+        Y: -0.38446924090385437
+        Z: 2.3083205223083496
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3299996554851532
-      Target Frame: base_link
-      Value: Orbit (rviz_default_plugins)
-      Yaw: 5.453152656555176
+      Pitch: 0.4903982877731323
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 5.673572540283203
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 773
+  Height: 1011
   Hide Left Dock: false
-  Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000015600000267fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d00000267000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000267fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d00000267000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005a00000003efc0100000002fb0000000800540069006d00650100000000000005a00000026f00fffffffb0000000800540069006d006501000000000000045000000000000000000000032f0000026700000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Hide Right Dock: true
+  MotionPlanning:
+    collapsed: false
+  MotionPlanning - Trajectory Slider:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000400000000000001ee00000355fc020000000dfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000000c9000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001a00660072006f006e0074005f00630061006d005f0069006d0067010000010c000000690000001600fffffffb0000001e0067007200690070007000650072005f00630061006d005f0069006d0067010000017b000000940000001600fffffffb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000004100fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006701000002150000017d0000017d00ffffff000000010000010f000002b0fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d000002b0000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000006b20000003efc0100000002fb0000000800540069006d00650100000000000006b20000026f00fffffffb0000000800540069006d00650100000000000004500000000000000000000004be0000035500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -742,7 +286,11 @@ Window Geometry:
   Tool Properties:
     collapsed: false
   Views:
+    collapsed: true
+  Width: 1714
+  X: 92
+  Y: 32
+  front_cam_img:
     collapsed: false
-  Width: 1440
-  X: 347
-  Y: 270
+  gripper_cam_img:
+    collapsed: false
