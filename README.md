@@ -1,8 +1,11 @@
 # Practica final. Simulación en ROS2 y Gazebo
 ***
 **Autor**: *Sergio Cobos Blanco*
+
 **Asignatura**: *Modelado y Simulación de Robots*
+
 **Grado**: *Grado En Ingenieria Robótica Software*
+
 **Universidad**: *Universidad Rey Juan Carlos*
 ***
 
@@ -23,4 +26,4 @@
         - Gazebo image bridges para las imágenes de las cámaras
         - *twist_stamper* para enviar los comandos de /cmd a simulación
 
-- Control del brazo con [Moveit](moveit.picknik.ai/main/index.html)
+- Control del brazo con [Moveit](https://moveit.picknik.ai/main/index.html)
