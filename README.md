@@ -26,4 +26,7 @@
         - Gazebo image bridges para las imágenes de las cámaras
         - *twist_stamper* para enviar los comandos de /cmd a simulación
 
+    * Utilizar el launcher [robot_controllers](speedy_description/launch/robot_controllers.launch.py) para lanzar los controladores de las ruedas, el brazo y el gancho del brazo.
+
 - Control del brazo con [Moveit](https://moveit.picknik.ai/main/index.html)
+
