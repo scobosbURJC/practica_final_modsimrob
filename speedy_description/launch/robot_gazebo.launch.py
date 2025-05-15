@@ -58,8 +58,6 @@ def get_model_paths(packages_names):
 
 # Launch description
 def generate_launch_description():
-    moveit_config = MoveItConfigsBuilder("speedy", package_name="speedy_moveit_config").to_moveit_configs()
-   
     declare_sim_time = DeclareLaunchArgument(
         'use_sim_time', default_value='true',
         description="use_sim_time simulation parameter"
@@ -87,12 +85,28 @@ def generate_launch_description():
     start_gazebo_server_cmd = OpaqueFunction(function=start_gzserver)
 
     # TBD: RViz config and launching
+    moveit_config_path = join(get_package_share_directory("speedy_moveit_config"), "config")
+
+    pilz_cartesian_limits_file_path = join(moveit_config_path, 'pilz_cartesian_limits.yaml')
+    moveit_config = (MoveItConfigsBuilder("speedy", package_name="speedy_moveit_config")
+                        .planning_pipelines(
+                            pipelines=["ompl", "pilz_industrial_motion_planner", "stomp"],
+                            default_planning_pipeline="ompl"
+                        )
+                        .planning_scene_monitor(
+                            publish_robot_description=False,
+                            publish_robot_description_semantic=True,
+                            publish_planning_scene=True,
+                        )
+                    ).to_moveit_configs()
+
     rviz_cmd = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         output='log',
         parameters=[
+            #moveit_config.planning_pipelines,
             {
                 'config_file': join(
                     pkg_path, 'rviz', 'robot.rviz'
