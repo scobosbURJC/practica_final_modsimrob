@@ -40,7 +40,8 @@ Utilizando `rviz2` podemos visualizar el modelo del robot, sin necesidad de simu
 Pero para poder visualizar los links unidos a joints moviles, y sus  hijos, es necesario que se publique información relevante sobre estos joints en el topic `/joint_states`. Para ello, se debe utilizar el nodo `joint_state_publisher_gui`, que no solo publicará esta información, si no que también nos brindará una interfaz para controlarlos.
 
 <div align="center">
-  <img src="media/rviz_robot_joints.gif" alt="robot_rviz"/>
+    <img src="media/rviz_robot_joints.gif" alt="robot_rviz_gif"/>
+    <img src="media/rviz_robot_joints_cap.png" alt="robot_rviz_cap">
 </div>
 
 En el PDF [tf_tree](media/tf_tree.pdf) podemos encontrar el arbol generado con el nodo `view_frames` de `tf2_tools`.
