@@ -74,6 +74,8 @@ Todos las posiciones predefinidas que se van a nombrar se encuentran en el fiche
 
 ### Secuencia de pick and place
 
+La secuencia está grabada en el siguiente rosbag: https://drive.google.com/file/d/1Zt9C5sO8J7pZEfB5tyxRAEEe5ohIPaRO/view?usp=sharing
+
 ##### Paso 1
 Speedy coloca el brazo en la posición `front_up` para poder aprovechar la cámara del gripper al acercarse al cubo, sin que el robot pierda visión frontal. Esto con el fin de ir orientando aproximadamente el robot para el proceso de **pick**.
 
